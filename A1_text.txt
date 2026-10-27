@@ -1,0 +1,67 @@
+
+
+
+Assignment 1
+
+
+
+
+Evolutionary Computing:Standard Assignment 1
+
+Read this whole document before starting your assignment!
+1Introduction
+The objective of this assignment is to gain experience with using Evolutionary Computation. To this end you will develop, apply, and compare Evolutionary Algorithms for the task of evolving a robot body using the ariel framework. The assignment is to be done in groups of 4. The deadline -not negotiable- is as follows:
+21.09.2026, 9:00
+Each day of delay in the submission will result in a deduction of 0.5 points from your assignment grade.
+2Resources
+All the resources (files) you need to install/use the ariel framework and start your experiments are available on GitHub: https://github.com/AndrzejSzczepura/EvolutionaryComputing2026. Note that this is not the official repository of the Ariel framework, but a forked version, adjusted for the needs of our course.
+3Preparation
+
+Clone the repository and install ariel following the setup guide.
+Run A1_template_2026.py to confirm your installation works.
+
+4Assignment
+
+WHAT: Evolve a robot body using ariel so that its phenotype resembles a target set of body phenotypes. Investigate one aspect of your EA (mutation, crossover, selection) as your research question - see "Rules and guidelines" below for what this means in practice.
+Fitness: the (weighted) tree edit distance between your candidate's phenotype and each phenotype in a target set of bodies, aggregated as the mean distance across targets plus one standard deviation of those per-target distances (lower is better). The exact metric and cost weights are implemented in tree_edit_distance.py in the starter code - read it before you start, you cannot reason about your EA's behaviour without knowing what it is being scored on.
+Genome representation: ariel provides two representations for this task. You choose freely:
+
+Neural Developmental Encoding - ariel.ec.genotypes.nde
+Tree-based - ariel.ec.genotypes.tree
+
+
+HOW: Design an experiment to answer your research question. Repeat your final experiments at least 5 times independently and present statistics (mean and spread) based on these runs. Compare against a random-search baseline at the same evaluation budget.
+WHAT TO HAND IN: The report as specified below and your code.
+HOW TO HAND IN: Submit a single compressed file named groupnumber.zip, containing a folder with the same name, including the report as groupnumber.pdf and your code.
+
+5Rules and guidelines
+
+You are NOT allowed to make changes to the source code of the ariel framework (anything in src/ariel). Making such changes would be qualified as fraud, leading you to FAIL the assignment.
+You may use ariel's built-in EA operators as building blocks; the overall EA design should be your own.
+For your second EA variant, you can use two different EAs, or the same EA with a difference in one aspect (e.g. mutation, crossover, selection scheme, parameter tuning, fitness formulation). You can use any EA, from literature or devised by yourself.
+Repeat your final experiments at least 5 times independently for both variants, and present statistics based on these runs for each.
+Compare your algorithm(s) with a line-plot across generations, showing the average/std of fitness over your independent runs.
+ariel also provides a CPPN-based genome representation, but it is not supported for this assignment - use tree or nde only.
+
+6Report structure
+Maximum 3 pages (excluding cover page and bibliography), GECCO19 template.
+Cover page: name of the course; number and name of the assignment; team number/name; team members' names and student ID numbers; date.
+
+Introduction: a specific research question or hypothesis is required - a vague statement of goals is not sufficient.
+Methods: explain how your algorithm works and its motivation, parameter settings, experimental setup, fitness function, budget. Make sure everything is reproducible.
+Results and discussion: discuss your results and what they show about your research question.
+Conclusions
+Literature list / bibliography
+
+7Tips
+
+Test your algorithm first using a small population for few generations.
+A population between 50 and 100 over 100 generations is a reasonable range to work with - both representations converge well within it.
+Be organized concerning the output files of your experiments.
+Keep the deadline in mind and work fast - you only have 10 days to complete this assignment.
+
+8Grading
+Your grade is based on the provided report. We will check the code for correctness and coherence with the report, but pure performance is not part of the grade. Treat the code mainly as a source of data for the report.
+Each assignment is worth a maximum of 10 points, and the final grade is calculated as: 50% (Assignment 1 - you're reading it now) + 50% (Assignment 2).
+
+
