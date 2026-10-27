@@ -158,17 +158,6 @@ uv run python experiments/plot_results.py
 
 ---
 
-## 👥 Authors & Contributions
-
-**Group 23 · Evolutionary Computing 2026 · VU Amsterdam**
-
-- **Anish Behera** – Experiment execution, random search baseline, data validation.
-- **Siddhant Singh Bisht** – Controller & EA implementation, physics simulation pipeline, repository management.
-- **Munishwar Pradhan** – Statistical analysis (Mann-Whitney U, Cliff's delta), automated visualization.
-- **Eduardo Martin Quintana** – Literature review, methodology formulation, report synthesis.
-
----
-
 ## 📚 References & Citation
 
 1. Eiben, A. E., & Smith, J. E. (2015). *Introduction to Evolutionary Computing*. Natural Computing Series. Springer.
