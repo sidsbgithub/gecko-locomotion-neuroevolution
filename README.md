@@ -17,7 +17,7 @@
 
 This repository contains the complete experimental code, statistical analysis pipeline, dataset, and report for **neuroevolution of targeted locomotion** using the [ARIEL](https://ci-group.github.io/ariel/) evolutionary robotics framework and the [MuJoCo](https://mujoco.org/) physics engine.
 
-We evolve the continuous synaptic weights ($D = 138$) of a feedforward neural controller driving a modular **Gecko** robot (from the RoboGen-lite *John Set*) to traverse a flat plane towards a target positioned $2.0\,\text{m}$ along the x-axis. We systematically investigate the trade-off between exploration and exploitation governed by the **Gaussian mutation step size** ($\sigma = 0.1$ vs. $\sigma = 0.5$) under a $(\mu + \lambda)$ evolutionary strategy across 30 independent runs (10 seeds each), compared against an evaluation-matched random-search baseline.
+We evolve the continuous synaptic weights (D = 138) of a feedforward neural controller driving a modular **Gecko** robot (from the RoboGen-lite *John Set*) to traverse a flat plane towards a target positioned 2.0 m along the x-axis. We systematically investigate the trade-off between exploration and exploitation governed by the **Gaussian mutation step size** (σ = 0.1 vs. σ = 0.5) under a (μ + λ) evolutionary strategy across 30 independent runs (10 seeds each), compared against an evaluation-matched random-search baseline.
 
 ```mermaid
 graph LR
@@ -36,15 +36,15 @@ graph LR
 
 | Research Question | Findings |
 |---|---|
-| **RQ1: Locomotion Performance**<br/>*How does mutation step size $\sigma$ affect how close an evolved gecko gets to the target?* | **Small steps ($\sigma = 0.1$) achieve superior peak performance.** $\sigma = 0.1$ reaches a mean final distance of **$0.565\,\text{m}$**, outperforming $\sigma = 0.5$ ($0.824\,\text{m}$) and obliterating matched random search ($1.851\,\text{m}$, $p < 0.001$, Cliff's $\|\delta\| = 1.0$). |
-| **RQ2: Search Consistency & Stalling**<br/>*Does $\sigma$ affect search consistency and vulnerability to local optima across seeds?* | **Small steps suffer from occasional entrapment.** While $\sigma = 0.1$ rapidly optimizes on 8 out of 10 runs (reaching as close as $0.25\,\text{m}$), 2 runs (seeds 5 & 7) stalled in sub-optimal local basins ($\approx 1.3\,\text{m}$). In contrast, $\sigma = 0.5$ displayed steady, monotonic global improvement with zero premature stalls across all 10 seeds. |
+| **RQ1: Locomotion Performance**<br/>*How does mutation step size σ affect how close an evolved gecko gets to the target?* | **Small steps (σ = 0.1) achieve superior peak performance.** σ = 0.1 reaches a mean final distance of **0.565 m**, outperforming σ = 0.5 (0.824 m) and obliterating matched random search (1.851 m, p < 0.001, Cliff's \|δ\| = 1.0). |
+| **RQ2: Search Consistency & Stalling**<br/>*Does σ affect search consistency and vulnerability to local optima across seeds?* | **Small steps suffer from occasional entrapment.** While σ = 0.1 rapidly optimizes on 8 out of 10 runs (reaching as close as 0.25 m), 2 runs (seeds 5 & 7) stalled in sub-optimal local basins (≈ 1.3 m). In contrast, σ = 0.5 displayed steady, monotonic global improvement with zero premature stalls across all 10 seeds. |
 
 ---
 
 ## 📊 Experimental Results & Figures
 
 ### 1. Convergence Trajectories (Best Distance to Target)
-Convergence curves over 500 generations ($10{,}020$ evaluations per run, 10 seeds per method). Shaded bands denote $\pm 1$ standard deviation.
+Convergence curves over 500 generations (10,020 evaluations per run, 10 seeds per method). Shaded bands denote ±1 standard deviation.
 
 ![Figure 1: Best Fitness Convergence](figures/figure1_best_fitness.png)
 
@@ -63,17 +63,17 @@ Average fitness across the entire population, illustrating evolutionary progress
 ## ⚙️ Experimental Setup
 
 - **Robot Morphology:** Prebuilt *Gecko* (`ariel.body_phenotypes.robogen_lite.prebuilt_robots.john_set.gecko`), consisting of a core module, 6 active hinge joints, and structural bricks.
-- **Simulation Environment:** `SimpleFlatWorld` in MuJoCo, simulated for $T = 15.0\,\text{s}$ per evaluation.
+- **Simulation Environment:** `SimpleFlatWorld` in MuJoCo, simulated for T = 15.0 s per evaluation.
 - **Controller Architecture:**
-  - Fully-connected Feedforward Neural Network ($17 \to 6 \to 6$) with $\tanh$ activation functions.
-  - Inputs ($17$): Core position, orientation quaternions, and joint positions (`data.qpos`).
-  - Outputs ($6$): Target angles for the 6 hinge actuators.
-  - Total Genotype: $17 \times 6 + 6 \times 6 = 138$ real-valued continuous weights.
+  - Fully-connected Feedforward Neural Network (17 → 6 → 6) with tanh activation functions.
+  - Inputs (17): Core position, orientation quaternions, and joint positions (`data.qpos`).
+  - Outputs (6): Target angles for the 6 hinge actuators.
+  - Total Genotype: 17 × 6 + 6 × 6 = 138 real-valued continuous weights.
 - **EA Parameters:**
-  - Population size: $\mu = 20$, Offspring: $\lambda = 20$.
-  - Evaluation budget: 500 generations ($10{,}020$ total evaluations per run).
-  - Selection: Truncation parent selection (top 50%), Elitist $(\mu + \lambda)$ survival.
-  - Variation: Gaussian mutation with step size $\sigma \in \{0.1, 0.5\}$, mutation probability $1.0$.
+  - Population size: μ = 20, Offspring: λ = 20.
+  - Evaluation budget: 500 generations (10,020 total evaluations per run).
+  - Selection: Truncation parent selection (top 50%), Elitist (μ + λ) survival.
+  - Variation: Gaussian mutation with step size σ ∈ {0.1, 0.5}, mutation probability 1.0.
 
 ---
 
