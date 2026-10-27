@@ -9,7 +9,7 @@
 > **Evolutionary Computing 2026 · Standard Assignment – Task II**  
 > **Authors (Group 23):** Anish Behera, Siddhant Singh Bisht, Munishwar Pradhan, Eduardo Martin Quintana  
 > **Affiliation:** Department of Computer Science, Vrije Universiteit Amsterdam  
-> **Full Academic Report:** [A2_report_group23.pdf](report/A2_report_group23.pdf) (or [submission/23/23.pdf](submission/23/23.pdf))
+> **Full Academic Paper:** [gecko_neuroevolution_paper.pdf](report/gecko_neuroevolution_paper.pdf)
 
 ---
 
@@ -46,17 +46,17 @@ graph LR
 ### 1. Convergence Trajectories (Best Distance to Target)
 Convergence curves over 500 generations ($10{,}020$ evaluations per run, 10 seeds per method). Shaded bands denote $\pm 1$ standard deviation.
 
-![Figure 1: Best Fitness Convergence](submission/23/figures/figure1_best_fitness.png)
+![Figure 1: Best Fitness Convergence](figures/figure1_best_fitness.png)
 
 ### 2. Final Run Distribution & Run Consistency
 Boxplot with individual run jitter points showing the final distance to the target across all 10 seeds.
 
-![Figure 2: Final Best Fitness Boxplot](submission/23/figures/figure2_final_boxplot.png)
+![Figure 2: Final Best Fitness Boxplot](figures/figure2_final_boxplot.png)
 
 ### 3. Population Mean Fitness (Genetic Diversity & Selection Pressure)
 Average fitness across the entire population, illustrating evolutionary progress and exploration dynamics.
 
-![Figure 3: Population Mean Fitness](submission/23/figures/figure3_population_mean.png)
+![Figure 3: Population Mean Fitness](figures/figure3_population_mean.png)
 
 ---
 
@@ -81,35 +81,18 @@ Average fitness across the entire population, illustrating evolutionary progress
 
 ```
 .
-├── assignments/
-│   ├── assignment_1/                 # Task I: Robot Morphology Evolution (Tree Genome)
-│   │   ├── A1_evolution_tree.py      # EA with operator screens & factorial racing
-│   │   ├── A1_final_analysis.py      # Statistical analysis & convergence plotting
-│   │   ├── A1_EA_baseline.py         # Baseline comparison
-│   │   ├── tree_edit_distance.py     # Zhang-Shasha tree-edit fitness metric
-│   │   ├── target_bodies/            # Target modular robot bodies (7–25 modules)
-│   │   ├── report/                   # Consolidated findings report (Markdown)
-│   │   └── README.md                 # Assignment 1 specific reproduction guide
-│   └── assignment_2/                 # Task II: Neuroevolution for Targeted Locomotion
-│       ├── A2_template_2026.py       # Main experiment script (EA & Random Search)
-│       ├── plot_results.py           # Automated statistical analysis & plotting
-│       └── Assignment2.html          # Course task description & requirements
-├── report/                           # Final Task II Academic Report
-│   ├── A2_report_group23.pdf         # Final 6-page academic report (PDF)
-│   └── A2_report_group23.docx        # Report source document (DOCX)
-├── submission/                       # Official Group 23 submission package
-│   ├── 23/                           # Self-contained submission directory
-│   │   ├── 23.pdf                    # Standalone submission PDF
-│   │   ├── README.md                 # Submission-specific documentation
-│   │   ├── code/                     # Experiment & plotting scripts
-│   │   ├── data/                     # Complete dataset (30 CSV files, 10 seeds x 3 configs)
-│   │   └── figures/                  # Publication-ready plots (PDF & PNG)
-│   ├── 23.zip                        # Compressed archive submitted for grading
-│   └── 23_report_source.docx         # Editable source document
-├── src/ariel/                        # Unmodified ARIEL evolutionary robotics framework
+├── experiments/
+│   ├── locomotion_neuroevolution.py  # Main experiment runner (EA & Random Search baseline)
+│   └── plot_results.py               # Statistical analysis & publication figure generation
+├── data/                             # Complete dataset (30 CSV logs, 10 seeds x 3 configs)
+├── figures/                          # Publication-ready plots (Figure 1–3 in PNG & PDF)
+├── report/                           # Final Academic Paper & Documentation
+│   ├── gecko_neuroevolution_paper.pdf
+│   └── gecko_neuroevolution_paper.docx
+├── src/ariel/                        # ARIEL evolutionary robotics framework
 ├── pyproject.toml                    # Python project configuration & dependencies
 ├── uv.lock                           # Locked dependency resolution
-└── README.md                         # This file
+└── README.md                         # Project documentation
 ```
 
 ---
@@ -127,8 +110,8 @@ Average fitness across the entire population, illustrating evolutionary progress
 Using `uv` (fastest):
 ```bash
 # Clone the repository
-git clone https://github.com/<your-username>/<repo-name>.git
-cd <repo-name>
+git clone https://github.com/<your-username>/gecko-locomotion-neuroevolution.git
+cd gecko-locomotion-neuroevolution
 
 # Install dependencies into virtual environment
 uv sync
@@ -147,30 +130,30 @@ Run a single seed with specified mutation step size ($\sigma = 0.1$, $\sigma = 0
 
 ```bash
 # Evolutionary Algorithm with sigma = 0.1 (seed 3)
-uv run assignments/assignment_2/A2_template_2026.py 3 0.1
+uv run python experiments/locomotion_neuroevolution.py 3 0.1
 
 # Evolutionary Algorithm with sigma = 0.5 (seed 3)
-uv run assignments/assignment_2/A2_template_2026.py 3 0.5
+uv run python experiments/locomotion_neuroevolution.py 3 0.5
 
 # Random Search baseline (seed 3)
-uv run assignments/assignment_2/A2_template_2026.py 3 random
+uv run python experiments/locomotion_neuroevolution.py 3 random
 ```
 
 Run all 10 seeds sequentially:
 ```bash
 # Linux / macOS (bash)
-for s in {1..10}; do uv run assignments/assignment_2/A2_template_2026.py $s 0.1; done
+for s in {1..10}; do uv run python experiments/locomotion_neuroevolution.py $s 0.1; done
 
 # Windows (PowerShell)
-1..10 | ForEach-Object { uv run assignments/assignment_2/A2_template_2026.py $_ 0.1 }
+1..10 | ForEach-Object { uv run python experiments/locomotion_neuroevolution.py $_ 0.1 }
 ```
 
 ### 3. Generate Figures & Statistical Summaries
 
-To re-compute Figures 1–3 and reproduce the statistical tables (Mann-Whitney U, Cliff's delta, mean ± std) from the provided dataset:
+To re-compute Figures 1–3 and reproduce the statistical tables (Mann-Whitney U, Cliff's delta, mean ± std) from `data/`:
 
 ```bash
-uv run python assignments/assignment_2/plot_results.py --data submission/23/data --out submission/23/figures
+uv run python experiments/plot_results.py
 ```
 
 ---

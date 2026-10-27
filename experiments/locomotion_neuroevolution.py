@@ -67,9 +67,8 @@ RNG = np.random.default_rng(SEED)
 set_seed(SEED)
 
 # --- DATA SETUP --- #
-SCRIPT_NAME = Path(__file__).stem
 CWD = Path.cwd()
-DATA = CWD / "__data__" / SCRIPT_NAME
+DATA = CWD / "data"
 DATA.mkdir(parents=True, exist_ok=True)
 
 # --- EXPERIMENT CONSTANTS --- #
