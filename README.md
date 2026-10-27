@@ -21,11 +21,11 @@ We evolve the continuous synaptic weights ($D = 138$) of a feedforward neural co
 
 ```mermaid
 graph LR
-    subgraph EA Loop [ (μ + λ) Neuroevolution Pipeline ]
-        P[Parent Selection<br/>Truncation 50%] --> M[Gaussian Mutation<br/>w ← w + N 0, σ²]
-        M --> S[MuJoCo Physics Simulation<br/>15s SimpleFlatWorld]
-        S --> F[Fitness Evaluation<br/>Final Distance to Target]
-        F --> V[Survivor Selection<br/>Elitist μ=20, λ=20]
+    subgraph EA_Loop ["(μ + λ) Neuroevolution Pipeline"]
+        P["Parent Selection<br/>Truncation 50%"] --> M["Gaussian Mutation<br/>w ← w + N(0, σ²)"]
+        M --> S["MuJoCo Physics Simulation<br/>15s SimpleFlatWorld"]
+        S --> F["Fitness Evaluation<br/>Final Distance to Target"]
+        F --> V["Survivor Selection<br/>Elitist μ=20, λ=20"]
         V --> P
     end
 ```
